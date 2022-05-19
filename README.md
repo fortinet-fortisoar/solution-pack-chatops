@@ -9,7 +9,7 @@
 
 **ChatOps Solution Pack** is designed to provide playbooks that facilitate users to perform a particular task using a set of commands.
 
-This solution pack implements a set of Chat-bot commands that provisions to get information of alert, incident or indicator records. Few important integrations used in the solution pack are IPStack and VirusTotal.
+**ChatOps Solution Pack** is designed to provide playbooks that facilitate users to perform a particular task using a set of commands. Please open any record like Alert or Incident, expand the **Workspace** panel and use ‘Comments’ to type your commands and observe the results.
 
 Open any record like Alert or Incident, expand the **Workspace** panel and use **Comments** to type your commands and observe the results.
 
