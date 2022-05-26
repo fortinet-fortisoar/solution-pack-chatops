@@ -9,9 +9,7 @@
 
 **ChatOps Solution Pack** is designed to provide playbooks that facilitate users to perform a particular task using a set of commands.
 
-**ChatOps Solution Pack** is designed to provide playbooks that facilitate users to perform a particular task using a set of commands. Please open any record like Alert or Incident, expand the **Workspace** panel and use ‘Comments’ to type your commands and observe the results.
-
-Open any record like Alert or Incident, expand the **Workspace** panel and use **Comments** to type your commands and observe the results.
+**ChatOps Solution Pack** is designed to provide playbooks that facilitate users to perform a particular task using a set of commands. Open a record like Alert or Incident, expand the **Workspace** panel and use ‘Comments’ to type your commands and observe the results.
 
 # Next Steps
 
