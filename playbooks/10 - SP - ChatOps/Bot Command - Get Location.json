@@ -22,6 +22,109 @@
     "steps": [
         {
             "@type": "WorkflowStep",
+            "name": "Display Message For Not Found",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "content": "<p>{{vars.input.params.content}}<\/p>\n<p>&nbsp;<\/p>\n<p><span style=\"color: #33cccc;\"><em><strong>Geo Location Details Not Found<br \/><\/strong><\/em><\/span><\/p>"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "{{vars.input.params.commentIRI}}",
+                "__recommend": [],
+                "tagsOperation": "OverwriteTags",
+                "collectionType": "\/api\/3\/comments",
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "350",
+            "left": "1100",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "f4ffbc26-7c21-4633-a1f3-af157d410a4c"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Extract Artifacts",
+            "description": null,
+            "arguments": {
+                "params": {
+                    "data": "{{vars.content}}",
+                    "whitelist": "",
+                    "case_sensitive": "",
+                    "override_regex": "",
+                    "private_whitelist": ""
+                },
+                "version": "3.1.2",
+                "connector": "cyops_utilities",
+                "operation": "extract_artifacts",
+                "operationTitle": "CyOPs: Extract Artifacts from String",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "190",
+            "left": "450",
+            "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+            "group": null,
+            "uuid": "a14ca981-aeb3-4c07-93c9-be31463c7949"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Geolocate Domain",
+            "description": null,
+            "arguments": {
+                "name": "IPStack",
+                "config": "b4129772-4eaa-4cf5-96c0-18454529ffae",
+                "params": {
+                    "query": "{{vars.steps.Extract_Artifacts.data.Host[0]}}",
+                    "fields": "",
+                    "enable_hostname": true,
+                    "enable_security": false
+                },
+                "version": "1.0.0",
+                "connector": "ipstack",
+                "operation": "domain_locate",
+                "operationTitle": "Geolocate Domain",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "20",
+            "left": "1100",
+            "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
+            "group": null,
+            "uuid": "a1a5db7b-888e-4778-a216-c5ec43ae8264"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Geolocate IP",
+            "description": null,
+            "arguments": {
+                "name": "IPStack",
+                "config": "b4129772-4eaa-4cf5-96c0-18454529ffae",
+                "params": {
+                    "query": "{{vars.steps.Extract_Artifacts.data.IP[0]}}",
+                    "fields": "",
+                    "enable_hostname": true,
+                    "enable_security": false
+                },
+                "version": "1.0.0",
+                "connector": "ipstack",
+                "operation": "ip_locate",
+                "operationTitle": "Geolocate IP",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "190",
+            "left": "1100",
+            "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
+            "group": null,
+            "uuid": "4cf063cd-561b-4fd5-bea9-3e777e27c8b3"
+        },
+        {
+            "@type": "WorkflowStep",
             "name": "Ip or Domain",
             "description": null,
             "arguments": {
@@ -50,7 +153,31 @@
             "top": "190",
             "left": "775",
             "stepType": "\/api\/3\/workflow_step_types\/12254cf5-5db7-4b1a-8cb1-3af081924b28",
+            "group": null,
             "uuid": "921f806c-338d-4110-969e-3ba2a7d3ea6b"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": {
+                            "alertID": "{{ vars.alertID }}",
+                            "content": "{{ vars.content }}",
+                            "commentID": "{{ vars.commentID }}",
+                            "commentIRI": "{{ vars.commentIRI }}"
+                        }
+                    }
+                }
+            },
+            "status": null,
+            "top": "190",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "group": null,
+            "uuid": "05e3349b-a22d-466f-a90a-ca1a9424a1c2"
         },
         {
             "@type": "WorkflowStep",
@@ -75,157 +202,20 @@
             "top": "100",
             "left": "1420",
             "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
             "uuid": "797052db-8917-430c-855b-a985b5142533"
-        },
-        {
-            "@type": "WorkflowStep",
-            "name": "Extract Artifacts",
-            "description": null,
-            "arguments": {
-                "params": {
-                    "data": "{{vars.content}}",
-                    "whitelist": "",
-                    "case_sensitive": "",
-                    "override_regex": "",
-                    "private_whitelist": ""
-                },
-                "version": "3.1.2",
-                "connector": "cyops_utilities",
-                "operation": "extract_artifacts",
-                "operationTitle": "CyOPs: Extract Artifacts from String",
-                "step_variables": []
-            },
-            "status": null,
-            "top": "190",
-            "left": "450",
-            "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
-            "uuid": "a14ca981-aeb3-4c07-93c9-be31463c7949"
-        },
-        {
-            "@type": "WorkflowStep",
-            "name": "Geolocate Domain",
-            "description": null,
-            "arguments": {
-                "name": "IPStack",
-                "config": "b4129772-4eaa-4cf5-96c0-18454529ffae",
-                "params": {
-                    "query": "{{vars.steps.Extract_Artifacts.data.Host[0]}}",
-                    "fields": "",
-                    "enable_hostname": true,
-                    "enable_security": false
-                },
-                "version": "1.0.0",
-                "connector": "ipstack",
-                "operation": "domain_locate",
-                "operationTitle": "Geolocate Domain",
-                "step_variables": []
-            },
-            "status": null,
-            "top": "20",
-            "left": "1100",
-            "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
-            "uuid": "a1a5db7b-888e-4778-a216-c5ec43ae8264"
-        },
-        {
-            "@type": "WorkflowStep",
-            "name": "Geolocate IP",
-            "description": null,
-            "arguments": {
-                "name": "IPStack",
-                "config": "b4129772-4eaa-4cf5-96c0-18454529ffae",
-                "params": {
-                    "query": "{{vars.steps.Extract_Artifacts.data.IP[0]}}",
-                    "fields": "",
-                    "enable_hostname": true,
-                    "enable_security": false
-                },
-                "version": "1.0.0",
-                "connector": "ipstack",
-                "operation": "ip_locate",
-                "operationTitle": "Geolocate IP",
-                "step_variables": []
-            },
-            "status": null,
-            "top": "190",
-            "left": "1100",
-            "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
-            "uuid": "4cf063cd-561b-4fd5-bea9-3e777e27c8b3"
-        },
-        {
-            "@type": "WorkflowStep",
-            "name": "Start",
-            "description": null,
-            "arguments": {
-                "step_variables": {
-                    "input": {
-                        "params": {
-                            "alertID": "{{ vars.alertID }}",
-                            "content": "{{ vars.content }}",
-                            "commentID": "{{ vars.commentID }}",
-                            "commentIRI": "{{ vars.commentIRI }}"
-                        }
-                    }
-                }
-            },
-            "status": null,
-            "top": "190",
-            "left": "125",
-            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
-            "uuid": "05e3349b-a22d-466f-a90a-ca1a9424a1c2"
-        },
-        {
-            "@type": "WorkflowStep",
-            "name": "Display Message For Not Found",
-            "description": null,
-            "arguments": {
-                "resource": {
-                    "content": "<p>{{vars.input.params.content}}<\/p>\n<p>&nbsp;<\/p>\n<p><span style=\"color: #33cccc;\"><em><strong>Geo Location Details Not Found<br \/><\/strong><\/em><\/span><\/p>"
-                },
-                "_showJson": false,
-                "operation": "Overwrite",
-                "collection": "{{vars.input.params.commentIRI}}",
-                "__recommend": [],
-                "tagsOperation": "OverwriteTags",
-                "collectionType": "\/api\/3\/comments",
-                "fieldOperation": {
-                    "recordTags": "Overwrite"
-                },
-                "step_variables": []
-            },
-            "status": null,
-            "top": "350",
-            "left": "1100",
-            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
-            "uuid": "f4ffbc26-7c21-4633-a1f3-af157d410a4c"
         }
     ],
     "routes": [
         {
             "@type": "WorkflowRoute",
-            "name": "Ip or Domain -> Geolocate Domain",
-            "targetStep": "\/api\/3\/workflow_steps\/a1a5db7b-888e-4778-a216-c5ec43ae8264",
-            "sourceStep": "\/api\/3\/workflow_steps\/921f806c-338d-4110-969e-3ba2a7d3ea6b",
-            "label": "Domain",
-            "isExecuted": false,
-            "uuid": "0eec9ad5-5dbb-4d04-a154-f919e1374445"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "Ip or Domain -> Geolocate IP",
-            "targetStep": "\/api\/3\/workflow_steps\/4cf063cd-561b-4fd5-bea9-3e777e27c8b3",
-            "sourceStep": "\/api\/3\/workflow_steps\/921f806c-338d-4110-969e-3ba2a7d3ea6b",
-            "label": "IP",
-            "isExecuted": false,
-            "uuid": "490dcc15-632f-4cd2-8e43-fb8d87d5c4c4"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "Start -> Extract Artifacts",
-            "targetStep": "\/api\/3\/workflow_steps\/a14ca981-aeb3-4c07-93c9-be31463c7949",
-            "sourceStep": "\/api\/3\/workflow_steps\/05e3349b-a22d-466f-a90a-ca1a9424a1c2",
+            "name": "Extract Artifacts -> Ip or Domain",
+            "targetStep": "\/api\/3\/workflow_steps\/921f806c-338d-4110-969e-3ba2a7d3ea6b",
+            "sourceStep": "\/api\/3\/workflow_steps\/a14ca981-aeb3-4c07-93c9-be31463c7949",
             "label": null,
             "isExecuted": false,
-            "uuid": "1749808e-0fb6-454e-a07c-fad8ae1249bd"
+            "group": null,
+            "uuid": "28f6a3e7-b37d-47ac-8b9f-79bf0dd5637d"
         },
         {
             "@type": "WorkflowRoute",
@@ -234,6 +224,7 @@
             "sourceStep": "\/api\/3\/workflow_steps\/a1a5db7b-888e-4778-a216-c5ec43ae8264",
             "label": null,
             "isExecuted": false,
+            "group": null,
             "uuid": "73258ce6-c2ab-4279-8395-e46d70dfe243"
         },
         {
@@ -243,16 +234,8 @@
             "sourceStep": "\/api\/3\/workflow_steps\/4cf063cd-561b-4fd5-bea9-3e777e27c8b3",
             "label": null,
             "isExecuted": false,
+            "group": null,
             "uuid": "c641c1eb-d211-4f2d-a57e-cdf9af38f578"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "Extract Artifacts -> Ip or Domain",
-            "targetStep": "\/api\/3\/workflow_steps\/921f806c-338d-4110-969e-3ba2a7d3ea6b",
-            "sourceStep": "\/api\/3\/workflow_steps\/a14ca981-aeb3-4c07-93c9-be31463c7949",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "28f6a3e7-b37d-47ac-8b9f-79bf0dd5637d"
         },
         {
             "@type": "WorkflowRoute",
@@ -261,16 +244,50 @@
             "sourceStep": "\/api\/3\/workflow_steps\/921f806c-338d-4110-969e-3ba2a7d3ea6b",
             "label": "Not Found",
             "isExecuted": false,
+            "group": null,
             "uuid": "f6e04e60-ff47-44f6-b736-5d81caa7355e"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Ip or Domain -> Geolocate Domain",
+            "targetStep": "\/api\/3\/workflow_steps\/a1a5db7b-888e-4778-a216-c5ec43ae8264",
+            "sourceStep": "\/api\/3\/workflow_steps\/921f806c-338d-4110-969e-3ba2a7d3ea6b",
+            "label": "Domain",
+            "isExecuted": false,
+            "group": null,
+            "uuid": "0eec9ad5-5dbb-4d04-a154-f919e1374445"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Ip or Domain -> Geolocate IP",
+            "targetStep": "\/api\/3\/workflow_steps\/4cf063cd-561b-4fd5-bea9-3e777e27c8b3",
+            "sourceStep": "\/api\/3\/workflow_steps\/921f806c-338d-4110-969e-3ba2a7d3ea6b",
+            "label": "IP",
+            "isExecuted": false,
+            "group": null,
+            "uuid": "490dcc15-632f-4cd2-8e43-fb8d87d5c4c4"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Extract Artifacts",
+            "targetStep": "\/api\/3\/workflow_steps\/a14ca981-aeb3-4c07-93c9-be31463c7949",
+            "sourceStep": "\/api\/3\/workflow_steps\/05e3349b-a22d-466f-a90a-ca1a9424a1c2",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "1749808e-0fb6-454e-a07c-fad8ae1249bd"
         }
     ],
+    "groups": [],
     "priority": null,
+    "playbookOrigin": "\/api\/3\/picklists\/b6d710a9-a8ec-41ec-8817-fe9fa062fcdd",
+    "isEditable": false,
     "uuid": "4bc1079d-2ec9-4375-9176-eec17c3b6e0a",
     "owners": [],
     "isPrivate": false,
     "deletedAt": null,
     "recordTags": [
-        "Subroutine",
-        "Bot - Execute commands"
+        "Bot - Execute commands",
+        "Subroutine"
     ]
 }

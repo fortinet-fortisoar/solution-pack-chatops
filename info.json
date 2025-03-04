@@ -1,6 +1,6 @@
 {
     "name": "chatOps",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "type": "solutionpack",
     "local": true,
     "label": "ChatOps",
@@ -9,32 +9,24 @@
             "name": "sOARFramework",
             "type": "solutionpack",
             "label": "SOAR Framework",
-            "version": "1.0.0",
             "minVersion": null
         }
     ],
     "prerequisite": "",
-    "certified": "false",
     "publisher": "Fortinet",
+    "contributor": "Mahdi Naili",
     "description": "This solution pack implements a set of Chat-bot commands that provisions to get information of alert, incident or indicator records. Few important integrations used in the solution pack are IPStack and VirusTotal.",
-    "help": "https:\/\/github.com\/fortinet-fortisoar\/solution-pack-chatops\/blob\/develop\/README.md",
+    "help": "https://github.com/fortinet-fortisoar/solution-pack-chatops/blob/release/1.0.1/README.md",
     "category": [],
     "supportInfo": "",
     "iconLarge": null,
+    "postInstallConfig": null,
     "fsrMinCompatibility": "7.2.0",
     "date": "2022-02-15T12:40:22+00:00",
     "contents": {
         "playbooks": [
             {
-                "name": "09 - ChatOps"
-            }
-        ],
-        "globalVariables": [
-            {
-                "id": 7,
-                "name": "Server_fqhn",
-                "value": "master.fortisoar.in",
-                "default_value": null
+                "name": "10 - SP - ChatOps"
             }
         ],
         "connectors": [

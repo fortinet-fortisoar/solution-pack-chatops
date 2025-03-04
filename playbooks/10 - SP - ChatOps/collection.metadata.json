@@ -1,7 +1,7 @@
 {
     "@context": "\/api\/3\/contexts\/WorkflowCollection",
     "@type": "WorkflowCollection",
-    "name": "09 - ChatOps",
+    "name": "10 - SP - ChatOps",
     "description": null,
     "visible": true,
     "image": null,

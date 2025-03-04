@@ -43,29 +43,32 @@
             "top": "560",
             "left": "120",
             "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
             "uuid": "f09b68ee-97a3-4959-bfff-53c5f834df33"
         },
         {
             "@type": "WorkflowStep",
-            "name": "Start",
+            "name": "Fetch The Similar Alerts",
             "description": null,
             "arguments": {
-                "step_variables": {
-                    "input": {
-                        "params": {
-                            "AlertID": "{{ vars.AlertID }}",
-                            "content": "{{ vars.content }}",
-                            "CommentID": "{{ vars.CommentID }}",
-                            "commentIRI": "{{ vars.commentIRI }}"
-                        }
-                    }
-                }
+                "for_each": {
+                    "item": "{{vars.steps.Get_Alert_Related_Indicators[0].indicators}}",
+                    "parallel": false,
+                    "condition": ""
+                },
+                "arguments": {
+                    "ListOfIndicators": "{{vars.item.id}}"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/af272ddc-0a87-42d9-a942-bc31fd649f97"
             },
             "status": null,
-            "top": "20",
+            "top": "300",
             "left": "120",
-            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
-            "uuid": "e4f49dcf-7014-43b3-ac38-75f505b4e96b"
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "group": null,
+            "uuid": "af8bbd12-d3de-4143-a0ab-2dd2ef6c206a"
         },
         {
             "@type": "WorkflowStep",
@@ -93,30 +96,8 @@
             "top": "160",
             "left": "120",
             "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "group": null,
             "uuid": "ace9d799-c53a-47df-880f-ae704f3eba76"
-        },
-        {
-            "@type": "WorkflowStep",
-            "name": "Fetch The Similar Alerts",
-            "description": null,
-            "arguments": {
-                "for_each": {
-                    "item": "{{vars.steps.Get_Alert_Related_Indicators[0].indicators}}",
-                    "parallel": false,
-                    "condition": ""
-                },
-                "arguments": {
-                    "ListOfIndicators": "{{vars.item.id}}"
-                },
-                "apply_async": false,
-                "step_variables": [],
-                "workflowReference": "\/api\/3\/workflows\/af272ddc-0a87-42d9-a942-bc31fd649f97"
-            },
-            "status": null,
-            "top": "300",
-            "left": "120",
-            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
-            "uuid": "af8bbd12-d3de-4143-a0ab-2dd2ef6c206a"
         },
         {
             "@type": "WorkflowStep",
@@ -129,7 +110,31 @@
             "top": "440",
             "left": "120",
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
             "uuid": "6d85a60c-5cf0-4d80-9c41-01db169d2c9b"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": {
+                            "AlertID": "{{ vars.AlertID }}",
+                            "content": "{{ vars.content }}",
+                            "CommentID": "{{ vars.CommentID }}",
+                            "commentIRI": "{{ vars.commentIRI }}"
+                        }
+                    }
+                }
+            },
+            "status": null,
+            "top": "20",
+            "left": "120",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "group": null,
+            "uuid": "e4f49dcf-7014-43b3-ac38-75f505b4e96b"
         }
     ],
     "routes": [
@@ -140,6 +145,7 @@
             "sourceStep": "\/api\/3\/workflow_steps\/af8bbd12-d3de-4143-a0ab-2dd2ef6c206a",
             "label": null,
             "isExecuted": false,
+            "group": null,
             "uuid": "511ae717-75a1-42d6-96ce-afca5b617692"
         },
         {
@@ -149,16 +155,8 @@
             "sourceStep": "\/api\/3\/workflow_steps\/ace9d799-c53a-47df-880f-ae704f3eba76",
             "label": null,
             "isExecuted": false,
+            "group": null,
             "uuid": "7d4d1476-61db-4bce-bf28-359638cff450"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "Start -> Get Alert Related Indicators",
-            "targetStep": "\/api\/3\/workflow_steps\/ace9d799-c53a-47df-880f-ae704f3eba76",
-            "sourceStep": "\/api\/3\/workflow_steps\/e4f49dcf-7014-43b3-ac38-75f505b4e96b",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "2f00b685-33a5-4e76-a658-a9b3d61c5655"
         },
         {
             "@type": "WorkflowRoute",
@@ -167,16 +165,30 @@
             "sourceStep": "\/api\/3\/workflow_steps\/6d85a60c-5cf0-4d80-9c41-01db169d2c9b",
             "label": null,
             "isExecuted": false,
+            "group": null,
             "uuid": "c0ae03b3-09e8-4f5f-a883-c09f77b50dcd"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Get Alert Related Indicators",
+            "targetStep": "\/api\/3\/workflow_steps\/ace9d799-c53a-47df-880f-ae704f3eba76",
+            "sourceStep": "\/api\/3\/workflow_steps\/e4f49dcf-7014-43b3-ac38-75f505b4e96b",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "2f00b685-33a5-4e76-a658-a9b3d61c5655"
         }
     ],
+    "groups": [],
     "priority": null,
+    "playbookOrigin": "\/api\/3\/picklists\/b6d710a9-a8ec-41ec-8817-fe9fa062fcdd",
+    "isEditable": false,
     "uuid": "1a12691d-9345-42a5-a781-f60b6ea63099",
     "owners": [],
     "isPrivate": false,
     "deletedAt": null,
     "recordTags": [
-        "Subroutine",
-        "Bot - Execute commands"
+        "Bot - Execute commands",
+        "Subroutine"
     ]
 }

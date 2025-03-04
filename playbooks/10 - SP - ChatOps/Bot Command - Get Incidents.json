@@ -22,6 +22,31 @@
     "steps": [
         {
             "@type": "WorkflowStep",
+            "name": "Check If Incident Found",
+            "description": null,
+            "arguments": {
+                "conditions": [
+                    {
+                        "option": "Yes",
+                        "step_iri": "\/api\/3\/workflow_steps\/4ad98416-07cd-4abc-9d10-19b728ab9828",
+                        "condition": "{{ vars.steps.Get_Incident_Details | length > 0 }}"
+                    },
+                    {
+                        "option": "No",
+                        "step_iri": "\/api\/3\/workflow_steps\/f25a26ca-c192-4f86-a5bc-e0d803bfb40c",
+                        "condition": "{{ vars.steps.Get_Incident_Details | length <= 0 }}"
+                    }
+                ]
+            },
+            "status": null,
+            "top": "110",
+            "left": "775",
+            "stepType": "\/api\/3\/workflow_step_types\/12254cf5-5db7-4b1a-8cb1-3af081924b28",
+            "group": null,
+            "uuid": "905a5f67-ffa7-4fe1-9bb4-36711f1f2fb4"
+        },
+        {
+            "@type": "WorkflowStep",
             "name": "Display Incidents Details",
             "description": null,
             "arguments": {
@@ -43,6 +68,7 @@
             "top": "30",
             "left": "1100",
             "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
             "uuid": "4ad98416-07cd-4abc-9d10-19b728ab9828"
         },
         {
@@ -71,6 +97,7 @@
             "top": "110",
             "left": "450",
             "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "group": null,
             "uuid": "4a886a02-0a6e-468f-bd62-1a3a6c18f9f4"
         },
         {
@@ -96,31 +123,8 @@
             "top": "190",
             "left": "1100",
             "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
             "uuid": "f25a26ca-c192-4f86-a5bc-e0d803bfb40c"
-        },
-        {
-            "@type": "WorkflowStep",
-            "name": "Check If Incident Found",
-            "description": null,
-            "arguments": {
-                "conditions": [
-                    {
-                        "option": "Yes",
-                        "step_iri": "\/api\/3\/workflow_steps\/4ad98416-07cd-4abc-9d10-19b728ab9828",
-                        "condition": "{{ vars.steps.Get_Incident_Details | length > 0 }}"
-                    },
-                    {
-                        "option": "No",
-                        "step_iri": "\/api\/3\/workflow_steps\/f25a26ca-c192-4f86-a5bc-e0d803bfb40c",
-                        "condition": "{{ vars.steps.Get_Incident_Details | length <= 0 }}"
-                    }
-                ]
-            },
-            "status": null,
-            "top": "110",
-            "left": "775",
-            "stepType": "\/api\/3\/workflow_step_types\/12254cf5-5db7-4b1a-8cb1-3af081924b28",
-            "uuid": "905a5f67-ffa7-4fe1-9bb4-36711f1f2fb4"
         },
         {
             "@type": "WorkflowStep",
@@ -142,6 +146,7 @@
             "top": "110",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "group": null,
             "uuid": "0d4ae3b2-cf2c-4e95-9dc8-3d6a821d3953"
         }
     ],
@@ -153,16 +158,8 @@
             "sourceStep": "\/api\/3\/workflow_steps\/905a5f67-ffa7-4fe1-9bb4-36711f1f2fb4",
             "label": "Yes",
             "isExecuted": false,
+            "group": null,
             "uuid": "248051b6-a9b1-498a-930f-4ad028459480"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "Get Incident Details -> Check If Incident Found",
-            "targetStep": "\/api\/3\/workflow_steps\/905a5f67-ffa7-4fe1-9bb4-36711f1f2fb4",
-            "sourceStep": "\/api\/3\/workflow_steps\/4a886a02-0a6e-468f-bd62-1a3a6c18f9f4",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "9cb0e531-ffb6-4d0b-ab5c-81566b43398a"
         },
         {
             "@type": "WorkflowRoute",
@@ -171,7 +168,18 @@
             "sourceStep": "\/api\/3\/workflow_steps\/905a5f67-ffa7-4fe1-9bb4-36711f1f2fb4",
             "label": "No",
             "isExecuted": false,
+            "group": null,
             "uuid": "fb2cf3c8-a92d-410e-abe4-c39153d9d461"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Incident Details -> Check If Incident Found",
+            "targetStep": "\/api\/3\/workflow_steps\/905a5f67-ffa7-4fe1-9bb4-36711f1f2fb4",
+            "sourceStep": "\/api\/3\/workflow_steps\/4a886a02-0a6e-468f-bd62-1a3a6c18f9f4",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "9cb0e531-ffb6-4d0b-ab5c-81566b43398a"
         },
         {
             "@type": "WorkflowRoute",
@@ -180,16 +188,20 @@
             "sourceStep": "\/api\/3\/workflow_steps\/0d4ae3b2-cf2c-4e95-9dc8-3d6a821d3953",
             "label": null,
             "isExecuted": false,
+            "group": null,
             "uuid": "a19b9909-3c16-47db-ba66-5746a3fcbe9e"
         }
     ],
+    "groups": [],
     "priority": null,
+    "playbookOrigin": "\/api\/3\/picklists\/b6d710a9-a8ec-41ec-8817-fe9fa062fcdd",
+    "isEditable": false,
     "uuid": "cabc5f48-6c89-4c9b-b55a-e4e9e9a7bc87",
     "owners": [],
     "isPrivate": false,
     "deletedAt": null,
     "recordTags": [
-        "Subroutine",
-        "Bot - Execute commands"
+        "Bot - Execute commands",
+        "Subroutine"
     ]
 }

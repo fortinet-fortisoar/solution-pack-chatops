@@ -1,5 +1,5 @@
-| [Home](https://github.com/fortinet-fortisoar/solution-pack-chatops/blob/develop/README.md) |
-|--------------------------------------------|
+| [Home](../README.md) |
+| -------------------- |
 
 # Usage
 
@@ -9,22 +9,34 @@ For Example. `$Get Alert 1` (Here 1 is Alert ID)
 
 - Click on the **Workspace** icon in the detailed view of the record
 
-    ![Open Workspace](https://github.com/fortinet-fortisoar/solution-pack-chatops/blob/develop/docs/res/open-workspace.png)
+    ![Open Workspace](./res/open-workspace.png)
 
 - Type the command in the **Comment** field
 
-    ![Workspace Command](https://github.com/fortinet-fortisoar/solution-pack-chatops/blob/develop/docs/res/workspace-command.png)
+    ![Workspace Command](./res/workspace-command.png)
 
 - The playbooks associated with command execute in the background and provide the respective command output
 
-    ![Command Output](https://github.com/fortinet-fortisoar/solution-pack-chatops/blob/develop/docs/res/command-output.png)
+    ![Command Output](./res/command-output.png)
+
+- The $bot option allow users to run actions from connectors and display the response, the action could be to fetch data such as indicator reputation
+
+    ![Command Output](./res/enrichment.png)
+
+- The $bot can also be used to run remediation actions such as blocking an IP address on an NGFW
+
+    ![Command Output](./res/blockip.png)
 
 ChatOps Solution Pack supports following commands:
 
-|Command|Description|
-| :- | :- |
-| `$Bot --help` | Displays a list of all the Bot commands. |
-| `$Get Alert <Alert ID>` | Retrieves details of a specific alert based on the provided alert ID.|
-| `$Get GeoLocation <IP Address or Domain>` | Retrieves the Geolocation details for the specified IP Address. |
-| `$Get Incident <Incident ID>` | Retrieves details of a specific incident based on the provided incident ID. |
-| `$Get Reputation <Indicator Value>` | Retrieves the reputation for the specified indicator. |
+| Command                                                                                            | Description                                                                 |
+| :------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------- |
+| `$Bot --help`                                                                                      | Displays a list of all the Bot commands.                                    |
+| `$Get Alert <Alert ID>`                                                                            | Retrieves details of a specific alert based on the provided alert ID.       |
+| `$Get GeoLocation <IP Address or Domain>`                                                          | Retrieves the Geolocation details for the specified IP Address.             |
+| `$Get Incident <Incident ID>`                                                                      | Retrieves details of a specific incident based on the provided incident ID. |
+| `$Get Reputation <Indicator Value>`                                                                | Retrieves the reputation for the specified indicator.                       |
+| `$bot --connector=CONNECTOR_NAME --action=ACTION_NAME --param=PARAM1:VALUE1 --param=PARAM2:VALUE2` | Executes connector operations                                               |
+
+| [Installation](./setup.md#installation) | [Configuration](./setup.md#configuration) | [Contents](./contents.md) |
+| --------------------------------------- | ----------------------------------------- | ------------------------- |

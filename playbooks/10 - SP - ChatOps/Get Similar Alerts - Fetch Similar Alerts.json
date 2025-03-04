@@ -42,6 +42,7 @@
             "top": "165",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "group": null,
             "uuid": "c4a583fd-c98d-4091-8adc-8f1bc1263be8"
         },
         {
@@ -55,6 +56,7 @@
             "top": "300",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
             "uuid": "f52a5fc9-2bdf-4789-9610-a2486e744a64"
         },
         {
@@ -74,19 +76,11 @@
             "top": "30",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "group": null,
             "uuid": "5999c115-b6d2-4ae3-a4a5-38e55328775e"
         }
     ],
     "routes": [
-        {
-            "@type": "WorkflowRoute",
-            "name": "Start -> a",
-            "targetStep": "\/api\/3\/workflow_steps\/c4a583fd-c98d-4091-8adc-8f1bc1263be8",
-            "sourceStep": "\/api\/3\/workflow_steps\/5999c115-b6d2-4ae3-a4a5-38e55328775e",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "3e55d348-737b-49ff-a811-30a811c52e42"
-        },
         {
             "@type": "WorkflowRoute",
             "name": "Find Indicator Related Alerts -> Set Alert Data",
@@ -94,10 +88,24 @@
             "sourceStep": "\/api\/3\/workflow_steps\/c4a583fd-c98d-4091-8adc-8f1bc1263be8",
             "label": null,
             "isExecuted": false,
+            "group": null,
             "uuid": "1b421a70-6fae-4a17-b938-4acd2590e460"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> a",
+            "targetStep": "\/api\/3\/workflow_steps\/c4a583fd-c98d-4091-8adc-8f1bc1263be8",
+            "sourceStep": "\/api\/3\/workflow_steps\/5999c115-b6d2-4ae3-a4a5-38e55328775e",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "3e55d348-737b-49ff-a811-30a811c52e42"
         }
     ],
+    "groups": [],
     "priority": null,
+    "playbookOrigin": "\/api\/3\/picklists\/b6d710a9-a8ec-41ec-8817-fe9fa062fcdd",
+    "isEditable": false,
     "uuid": "af272ddc-0a87-42d9-a942-bc31fd649f97",
     "owners": [],
     "isPrivate": false,
